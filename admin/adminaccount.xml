@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<admins>
+	<account>
+		<id>scott</id>
+		<psw>asdf</psw>
+		<level>1</level>
+	</account>
+	<account>
+		<id>huiping</id>
+		<psw>aaaa</psw>
+		<level>2</level>
+	</account>
+</admins>

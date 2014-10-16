@@ -5,19 +5,23 @@ include_once '../function/function_utils.php';
 
 /*Check login status*/
 session_start();
-FunctionUtils::CheckLogin();
-$sNickName = $_SESSION['nickname'];
+
+if(!isset($_SESSION['adminid'])){
+	echo "<script>alert('对不起，请登录后继续操作哦！');window.location.href='adminlogin.php';</script>";
+}
 
 /*Check input parameters*/
+$iOrderID = $_GET['orderid'];
 $sItemName = FunctionUtils::CheckInputParameter("itemname","post");
 $iItemNum = FunctionUtils::CheckInputParameter("itemnum","post");
 $sExtraInfo = FunctionUtils::CheckInputParameter("extrainfo","post");
+$sStatus = FunctionUtils::CheckInputParameter("status","post");
 
-$sql = sprintf("insert into tb_orderinfo(nickname,itemname,itemnum,extrainfo,inputtime,lastupdatetime) 
-								values('%s','%s',%s,'%s',now(),now())",$sNickName,$sItemName,$iItemNum,$sExtraInfo);
+$sql = sprintf("update tb_orderinfo set itemname='%s',itemnum=%s,extrainfo='%s',lastupdatetime=now(),status='%s' 
+				where orderid=%s;",$sItemName,$iItemNum,$sExtraInfo,$sStatus,$iOrderID);
 echo $sql;
 if(mysql_query($sql,$conn)==TRUE){
-	echo "<script>alert('下单成功！');window.location.href='../history.php'</script>";
+	echo "<script>alert('修改订单成功！');window.location.href='../history.php'</script>";
 }else{
 	echo "<script>alert('服务器繁忙，请稍后再试！');window.location.href='../login.php'</script>";
 }

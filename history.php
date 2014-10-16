@@ -8,9 +8,9 @@ session_start();
 if(!isset($_SESSION['userid'])){
 	echo "<script>alert('对不起，请登录后继续操作哦！');window.location.href='login.php';</script>";
 }
-$iUserID = $_SESSION['userid'];
+$sNickName = $_SESSION['nickname'];
 
-$sql = sprintf("select * from tb_orderinfo where userid=%s;",$iUserID);
+$sql = sprintf("select * from tb_orderinfo where nickname='%s';",$sNickName);
 $data = mysql_query($sql,$conn);
 ?>
 

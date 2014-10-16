@@ -28,7 +28,7 @@ if(1==$iRowNumber){
 	
 }else{
 	$sURL = "../login.php?uid=".$sNickName;
-	echo "<script>alert('你的帐号或密码错误！'); window.location.href ="."'".$sURL."'".";</script>";	
+	echo "<script>alert('您的帐号或密码错误！'); window.location.href ="."'".$sURL."'".";</script>";	
 }
 
 
