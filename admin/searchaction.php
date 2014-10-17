@@ -43,7 +43,7 @@ if("and"==$sCondition){
 }else{
     echo "<script>alert('ËÑË÷Ìõ¼þÒì³££¡');window.location.href='search.php';</script>";
 }
-echo $sql."<br/>";
+//echo $sql."<br/>";
 $data = mysql_query($sql,$conn);
 ?>
 

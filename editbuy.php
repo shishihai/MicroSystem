@@ -59,7 +59,7 @@ $rs = mysql_fetch_array($data);
 		<option value=0>其他</option>
 	</select><br/>	
 	补充说明：<textarea rows="3" cols="20" name="extrainfo" id="extrainfo"></textarea><br/>	
-	我要下单： <input name="submit" type="submit" id="buy_btn" value="下单">
+	修改订单： <input name="submit" type="submit" id="buy_btn" value="修改订单">
 	</form>
 </body>
 </html>

@@ -27,6 +27,7 @@ foreach ($accounts as $ac){
 	}
 }
 if (TRUE==$bLoginFlag){
+	session_start();
 	$_SESSION['adminid']=$acid;
 	echo "<script>alert('µÇÂ½³É¹¦!');window.location.href='search.php';</script>";
 }else{

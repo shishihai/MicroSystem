@@ -16,7 +16,7 @@ $sExtraInfo = FunctionUtils::CheckInputParameter("extrainfo","post");
 
 $sql = sprintf("update tb_orderinfo set itemname='%s',itemnum=%s,extrainfo='%s',lastupdatetime=now() 
 				where orderid=%s;",$sItemName,$iItemNum,$sExtraInfo,$iOrderID);
-echo $sql;
+//echo $sql;
 if(mysql_query($sql,$conn)==TRUE){
 	echo "<script>alert('修改订单成功！');window.location.href='../history.php'</script>";
 }else{
