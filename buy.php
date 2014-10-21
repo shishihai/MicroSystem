@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gbk">
 <title>我要下单</title>
 	<script type="text/javascript" src="js/js_utils.js"></script>
+	<script type="text/javascript" src="js/js_lib.js"></script>
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
@@ -14,11 +15,30 @@
 			  alert("对不起，请登录后继续操作哦！");
 			  location.href = "login.htm";
 		  }
-	  });	 
+	  });
+
+	  function SubmitBuy(sURL, callback){
+			var sItemName = encodeURIComponent($("#itemname").val());
+			var iItemNum = $("#itemnum").val();
+			var sExtraInfo = encodeURIComponent($("#extrainfo").val());
+			var arrSubmitData = {'itemname':sItemName,
+								'itemnum':iItemNum,'extrainfo':sExtraInfo};
+			var ret = SubmitData(sURL, arrSubmitData);
+			callback(ret);
+		  }
+	  function CallbackBuy(ret){
+		  if(0 == ret.iRetCode){
+				alert(ret.sRetMsg);
+				location.href = "history.php";
+		  }else{
+			  alert(ret.sRetMsg);
+			  loaction.href = "login.php";
+		  }
+	  }	 
 	</script>
 	
-	<form name="buyform" method="post" action="./action/savebuy.php"
-		onSubmit="return chkBuyInput(this)">
+	<form name="buyform"  action="javascript:SubmitBuy('./action/savebuy.php',CallbackBuy);"
+		onSubmit="return CheckBuyInput(this)">
 		物品名称：<input type="text" name="itemname" id="itemname"><br/>
 	        物品数量：<select name="itemnum" id="itemnum">
 		<option value="">请选择数量：</option>

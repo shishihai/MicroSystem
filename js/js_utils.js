@@ -81,15 +81,16 @@ function CheckLoginInput(form){
 
 function CheckBuyInput(form){
 	if(form.itemname.value==""){
-    	alert("请输入登录帐号！");
+    	alert("请输入物品名称！");
     	form.nickname.focus();
     	return false;
     }
     if(form.itemnum.value==""){
-        alert("请输入登录密码！");
+        alert("请输入购买数量！");
         form.password.focus();
         return false;
     }
+    
     return true;
 }
 

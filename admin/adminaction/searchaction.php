@@ -1,11 +1,11 @@
 <?php
 error_reporting(E_ALL);
-include_once '../conn/connection_utils.php';
-include_once '../function/function_utils.php';
+include_once '../../conn/connection_utils.php';
+include_once '../../function/function_utils.php';
 
 session_start();
 if(!isset($_SESSION['adminid'])){
-	echo "<script>alert('对不起，请登录后继续操作哦！');window.location.href='adminlogin.php';</script>";
+	echo "<script>alert('对不起，请登录后继续操作哦！');window.location.href='../adminlogin.php';</script>";
 }
 /*Check input parameters*/
 $sItemName = FunctionUtils::CheckInputParameter("itemname","post");
@@ -41,7 +41,7 @@ if("and"==$sCondition){
 	}
 	$sql = "select * from tb_orderinfo where ".$sSqlCondition;
 }else{
-    echo "<script>alert('搜索条件异常！');window.location.href='search.php';</script>";
+    echo "<script>alert('搜索条件异常！');window.location.href='../search.php';</script>";
 }
 //echo $sql."<br/>";
 $data = mysql_query($sql,$conn);
@@ -72,7 +72,7 @@ $data = mysql_query($sql,$conn);
 		<td><?php echo $rs["lastupdatetime"]?></td>
 		<td><?php echo $rs["status"]?></td>		
 		<?php		   
-		    $sHref = 'editbuy.php?orderid='.$rs["orderid"];
+		    $sHref = '../editbuy.php?orderid='.$rs["orderid"];
 			echo "<td><a href=$sHref>修改订单</a></td>";		   
 		?>
 	</tr>

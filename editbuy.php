@@ -22,6 +22,7 @@ $rs = mysql_fetch_array($data);
 <meta http-equiv="Content-Type" content="text/html; charset=gbk">
 <title>修改订单</title>
 	<script type="text/javascript" src="js/js_utils.js"></script>
+	<script type="text/javascript" src="js/js_lib.js"></script>
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
@@ -40,10 +41,31 @@ $rs = mysql_fetch_array($data);
 		  $("#itemnum").val(iItemNum);
 		  $("#extrainfo").text(sExtrainfo);
 	  });	 
+
+	  function SubmitEditBuy(sURL, callback){
+			var sItemName = encodeURIComponent($("#itemname").val());
+			var iItemNum = $("#itemnum").val();
+			
+			var sExtraInfo = encodeURIComponent($("#extrainfo").val());
+			var arrSubmitData = {'itemname':sItemName,
+								'itemnum':iItemNum,'extrainfo':sExtraInfo};
+			var ret = SubmitData(sURL, arrSubmitData);
+			callback(ret);
+		  }
+	  function CallbackEditBuy(ret){
+		  if(0 == ret.iRetCode){
+				alert(ret.sRetMsg);
+				location.href = "history.php";
+		  }else{
+			  alert(ret.sRetMsg);
+			  loaction.href = "login.php";
+		  }
+	  }	 
 	</script>
 	
-	<form name="buyform" method="post" action="./action/saveeditbuy.php?orderid=<?php echo $rs['orderid'];?>"
-		onSubmit="return chkBuyInput(this)">
+	<!--  <form name="buyform" method="post" action="./action/saveeditbuy.php?orderid=<?php echo $rs['orderid'];?>"-->
+	<form name="buyform" method="post" action="javascript:SubmitEditBuy('./action/saveeditbuy.php?orderid=<?php echo $rs['orderid'];?>',CallbackEditBuy);"
+		onSubmit="return CheckBuyInput(this)">
 		物品名称：<input type="text" name="itemname" id="itemname"><br/>
 	        物品数量：<select name="itemnum" id="itemnum">
 		<option value="">请选择数量：</option>

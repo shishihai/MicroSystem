@@ -16,7 +16,7 @@
 </script>
 
 <h2 id="welcometext"></h2>
-<a href="buy.php">我要下单</a></br>
-<a href="history.php">查看订单</a></br>
+<a href="buy.php">我要下单</a><br/>
+<a href="history.php">查看订单</a><br/>
 </body>
 </html>

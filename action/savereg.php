@@ -2,14 +2,15 @@
 error_reporting(E_ALL);
 include_once '../conn/connection_utils.php';
 include_once '../function/function_utils.php';
+include_once '../cfg/macromsg.php';
 
 /*Check input parameters*/
-$sNickName = FunctionUtils::CheckInputParameter("nickname","post");
-$iGender = FunctionUtils::CheckInputParameter("gender","post");
-$sPhone = FunctionUtils::CheckInputParameter("phone","post");
-$sEmail = FunctionUtils::CheckInputParameter("email","post");
-$sAddress = FunctionUtils::CheckInputParameter("address","post");
-$sPassword = FunctionUtils::CheckInputParameter("password","post");
+$sNickName = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("nickname","post")));
+$iGender = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("gender","post")));
+$sPhone = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("phone","post")));
+$sEmail = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("email","post")));
+$sAddress = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("address","post")));
+$sPassword = iconv('UTF-8', 'GB2312', urldecode(FunctionUtils::CheckInputParameter("password","post")));
 
 
 /*Check whether the 'nickname' exists*/
@@ -29,9 +30,11 @@ $sql = sprintf("insert into tb_userinfo(nickname,gender,email,phone,address,pass
 				$sNickName,$iGender,$sEmail,$sPhone,$sAddress,md5($sPassword));
 //echo "insert sql:".$sql."</br>";
 if(mysql_query($sql,$conn)){
-	echo "<script>alert('×¢²á³É¹¦£¡');window.location.href='../login.php';</script>";
+	FunctionUtils::EchoRet(0, FunctionUtils::gbk2utf8($ArrSuccessMsg["REGISTER"]));
+	//echo "<script>alert('×¢²á³É¹¦£¡');window.location.href='../login.php';</script>";
 }else{
-	echo "<script>alert('×¢²áÊ§°Ü£¡');window.location.href='../register.php';</script>";
+	FunctionUtils::EchoRet(0, FunctionUtils::gbk2utf8($ArrFailMsg["REGISTER"]));
+	//echo "<script>alert('×¢²áÊ§°Ü£¡');window.location.href='../register.php';</script>";
 }
 ?>
 

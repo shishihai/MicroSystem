@@ -1,14 +1,15 @@
 <?php
 error_reporting(E_ALL);
-include_once '../conn/connection_utils.php';
-include_once '../function/function_utils.php';
+include_once '../../conn/connection_utils.php';
+include_once '../../function/function_utils.php';
+include_once '../../cfg/macromsg.php';
 
 /*Check input parameters*/
 $sNickName = FunctionUtils::CheckInputParameter("adminname","post");
 $sPassword = FunctionUtils::CheckInputParameter("password","post");
 
 $doc = new DOMDocument();
-$doc->load('adminaccount.xml');
+$doc->load('../../cfg/adminaccount.xml');
 $accounts = $doc->getElementsByTagName('account');
 $bLoginFlag = FALSE;
 
@@ -29,9 +30,9 @@ foreach ($accounts as $ac){
 if (TRUE==$bLoginFlag){
 	session_start();
 	$_SESSION['adminid']=$acid;
-	echo "<script>alert('登陆成功!');window.location.href='search.php';</script>";
+	FunctionUtils::EchoRet(0, FunctionUtils::gbk2utf8($ArrSuccessMsg["LOGIN"]),$acid);
 }else{
-	echo "<script>alert('您的帐号或密码错误!');window.location.href='adminlogin.php';</script>";
+	FunctionUtils::EchoRet(-1, FunctionUtils::gbk2utf8($ArrFailMsg["LOGIN"]));
 }
 
 

@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gbk">
 <title>订单查找</title>
 	<script type="text/javascript" src="../js/js_utils.js"></script>
+		<script type="text/javascript" src="../js/js_lib.js"></script>
 	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.cookie.js"></script>
 	<script language="javascript" type="text/javascript" src="../js/DatePicker/WdatePicker.js"></script>
@@ -30,8 +31,9 @@
 		  }
 		  return true;
 	  }
+
 	</script>
-	<form name="searchform" method="post" action="searchaction.php"
+	<form name="searchform" method="post" action="./adminaction/searchaction.php"
 		onSubmit="return chkSearchInput(this)">
 		物品名称：<input type="text" name="itemname" id="itemname"><br/>
 		用户账户：<input type="text" name="nickname" id="nickname"><br/>

@@ -3,6 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gbk">
 <title>用户登录</title>
 <script type="text/javascript" src="js/js_utils.js"></script>
+<script type="text/javascript" src="js/js_lib.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
@@ -20,10 +21,28 @@
 	  });
 	  function pressEnter(){
 		  $("#password").click();
-	   }
-	 
+	   }	
+
+	   function SubmitLogin(sURL,callback){
+			var sNickName = $("#nickname").val();
+			var sPassword = $("#password").val();
+			var arrSubmitData = {'nickname':sNickName,'password':sPassword};
+			var ret = SubmitData(sURL,arrSubmitData);
+			console.log(ret.iRetCode+" "+ret.sRetMsg);
+			callback(ret);
+	   } 
+
+	   function CallbackLogin(ret){
+		   if(0 == ret.iRetCode){
+			   alert(ret.sRetMsg);
+			   location.href = "home.php?uid="+ret.sRetExtraData;
+		   }else{
+			   alert(ret.sRetMsg);
+			   location.href = "login.php?uid="+ret.sRetExtraData;
+		   }
+	   }	  
 	</script>
-	<form name="loginform" method="post" action="./action/login.php"
+	<form name="loginform" action="javascript:SubmitLogin('./action/login.php',CallbackLogin);"
 		onSubmit="return CheckLoginInput(this)">
 		登录帐号：<input type="text" name="nickname" id="nickname"><br/>
 	        登录密码：<input type="password" name="password" id="password" onkeydown="pressEnter();"><br/>
